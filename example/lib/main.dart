@@ -63,7 +63,10 @@ class _MyAppState extends State<MyApp> {
             children: [
               Text('Running on: $_platformVersion\n'),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  _flutterKotlinxSerializationVersionMismatchBugPlugin
+                      .useKotlinxSerialization();
+                },
                 child: const Text('use kotlinx.serialization'),
               ),
             ],

@@ -31,4 +31,10 @@ abstract class FlutterKotlinxSerializationVersionMismatchBugPlatform
   Future<String?> getPlatformVersion() {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
+
+  Future<void> useKotlinxSerialization() {
+    throw UnimplementedError(
+      'useKotlinxSerialization() has not been implemented.',
+    );
+  }
 }
