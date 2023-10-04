@@ -7,6 +7,14 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
+
+@Serializable
+data class Person(
+  val name: String,
+  val age: Int,
+)
 
 /** FlutterKotlinxSerializationVersionMismatchBugPlugin */
 class FlutterKotlinxSerializationVersionMismatchBugPlugin: FlutterPlugin, MethodCallHandler {
@@ -24,7 +32,11 @@ class FlutterKotlinxSerializationVersionMismatchBugPlugin: FlutterPlugin, Method
   override fun onMethodCall(call: MethodCall, result: Result) {
     if (call.method == "getPlatformVersion") {
       result.success("Android ${android.os.Build.VERSION.RELEASE}")
-    } else {
+    } else if (call.method == "useKotlinxSerialization") {
+      val personStr = "{\"name\": \"Tom Clancy\", \"age\": 66}"
+      val person = Json.decodeFromString<Person>(personStr)
+    }
+    else {
       result.notImplemented()
     }
   }
